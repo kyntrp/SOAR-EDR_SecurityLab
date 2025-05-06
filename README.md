@@ -178,4 +178,50 @@ Now let's try to run the LaZagne.exe again to see if we can capture a detection.
 ![image](https://github.com/user-attachments/assets/754bd5b3-7d40-412a-86d6-e2fb249fb3ed)
 
 
+Go to 'www.slack.com' then click 'GET STARTED'.
+![image](https://github.com/user-attachments/assets/bb26eabe-43d1-4223-a49a-1ddead2086da)
+
+create an account. make sure to input a valid email because it will send a verification.
+once done creating account. create a workspace.
+In the left side. create a channel.
+![image](https://github.com/user-attachments/assets/4c490576-4930-403b-8fe3-33a17e3a5556)
+
+Go to 'www.tines.com'
+Sign up for account.
+
+Create a new story, this is where we will create our playbook 
+
+![image](https://github.com/user-attachments/assets/f92fa558-0fd4-4321-b9d0-2e2f5c78122b)
+
+First, we have to establish a connection between LimaCharlie and Tines.
+Drag the 'Webhook' in the board name it 'Retrieve Detection'
+
+![image](https://github.com/user-attachments/assets/c152a780-a844-4db5-93c7-2b503a497ac4)
+
+Copy the 'Webhook URL'. go back to LimaCharlie. Click your organization and go to 'Outputs'.
+Click add 'output'.
+
+![image](https://github.com/user-attachments/assets/e6e4333f-4347-491f-8633-9c226eccda19)
+
+Select 'Detections'
+
+![image](https://github.com/user-attachments/assets/faca27ed-61c8-4b8f-94a6-956116ed3f08)
+
+Select 'Tines'
+
+![image](https://github.com/user-attachments/assets/e4bbfb26-1b16-477e-8a3e-bb8c34ed1470)
+
+Put a name then in 'Destionation Host', paste the Webhook URL copied earlier.
+
+![image](https://github.com/user-attachments/assets/f9f8c17e-2963-49f6-9b4d-4300dc37d5bf)
+
+to get a sample. retriger LaZagne.exe in your device again. then click 'Refresh Samples'.
+
+![image](https://github.com/user-attachments/assets/784c5ace-5456-4505-8ccf-e83fcc580e89)
+
+go back to Tines, in 'Webhook', click 'Events'.
+![image](https://github.com/user-attachments/assets/792ef6ea-2d5e-4d8f-a382-9e3c0722ca73)
+
+
+
 
