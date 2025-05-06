@@ -116,16 +116,66 @@ in your browser, open a new tab of LimaCharlie. Click your organization and head
 Paste this in Detect Box :
 
 
-  
+  ```
+events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+op: and
+rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: LaZagne.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: LaZagne
+    - case sensitive: false
+      op: is
+      path: event/HASH
+      value: '3cc5ee93a9ba1fc57389705283b760c8bd61f35e9398bbfa3210e2becf6d4b05'
+
+```
+
+Paste this in Response Box :
+```
+- action: report
+  metadata:
+    author: MyDFIR
+    description: TEST - Detects Lazagne Usage
+    falsepositives:
+    - ToTheMoon
+    level: high
+    tags:
+    - attack.credential_access
+  name: #insert name  - HackTool - Lazagne
+
+```
+
+
+![image](https://github.com/user-attachments/assets/484efcde-6f24-49b9-a935-bd8987c68552)
 
 
 
+In LimaCharlie, we can test the rules we've created to see if it will work or there is an error.
+In the same page, scroll down at the very bottom then click 'Target Event'. You need to paste the code of event so we will go back to timeline and copy the whole event.
+
+![image](https://github.com/user-attachments/assets/13e0f2cd-8717-4073-9fd0-5a4a846e0898)
+
+after you done pasting the code. click the 'Test event' in the bottom.
+
+![image](https://github.com/user-attachments/assets/a4bcf584-5eb2-4feb-8ab3-a23fbbe4a13f)
 
 
 
+for more information about creating rules in LimaCharlie. you can check it here : https://docs.limacharlie.io/docs/detection-and-response
 
 
-
+Now let's try to run the LaZagne.exe again to see if we can capture a detection. go to 'Detection' section to check what you captured.
+![image](https://github.com/user-attachments/assets/754bd5b3-7d40-412a-86d6-e2fb249fb3ed)
 
 
 
