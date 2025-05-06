@@ -182,21 +182,24 @@ Go to 'www.slack.com' then click 'GET STARTED'.
 ![image](https://github.com/user-attachments/assets/bb26eabe-43d1-4223-a49a-1ddead2086da)
 
 create an account. make sure to input a valid email because it will send a verification.
-once done creating account. create a workspace.
+once done creating account. create a channel.
 In the left side. create a channel.
-![image](https://github.com/user-attachments/assets/4c490576-4930-403b-8fe3-33a17e3a5556)
+![image](https://github.com/user-attachments/assets/d15c17a2-abae-4d9a-9bfb-c22cfed3ac28)
+
 
 Go to 'www.tines.com'
 Sign up for account.
 
-Create a new story, this is where we will create our playbook 
+In your teams, Create a new story, this is where we will create our playbook (Note : make sure that you make new story on your team, not on personal)
 
-![image](https://github.com/user-attachments/assets/f92fa558-0fd4-4321-b9d0-2e2f5c78122b)
+![image](https://github.com/user-attachments/assets/3e9cb4aa-426a-4f3e-8260-328d2da8339b)
+
 
 First, we have to establish a connection between LimaCharlie and Tines.
 Drag the 'Webhook' in the board name it 'Retrieve Detection'
 
-![image](https://github.com/user-attachments/assets/c152a780-a844-4db5-93c7-2b503a497ac4)
+![image](https://github.com/user-attachments/assets/f29a17e2-4cb2-46bd-bd4d-7206168f51d9)
+
 
 Copy the 'Webhook URL'. go back to LimaCharlie. Click your organization and go to 'Outputs'.
 Click add 'output'.
@@ -223,5 +226,153 @@ go back to Tines, in 'Webhook', click 'Events'.
 ![image](https://github.com/user-attachments/assets/792ef6ea-2d5e-4d8f-a382-9e3c0722ca73)
 
 
+Looking back to our diagram, Everytime LimaCharlie send a detection in Tines, it will send the detail of the detection in Slack and Email.
+Our next step is to create a link betweek Tines and Slack.
+Go to Slack and take a look at some applications clicking the '3 dot' in the top left.
+
+![image](https://github.com/user-attachments/assets/049f2b10-5d25-422f-bd5d-49c88795454d)
+
+Select 'Automation' and search for 'Tines' then click 'Add' then 'Add to slack'
+
+![image](https://github.com/user-attachments/assets/72a9f633-feee-4a4d-b732-76bd6d625a16)
+
+Now, go back to the Tines dashboard. click template and search for 'Slack' then drag it to dashboard
+
+![image](https://github.com/user-attachments/assets/b9bb7208-3494-44a1-82d1-8460863051d4)
+
+select 'Send a message'
+![image](https://github.com/user-attachments/assets/2029e68a-93f5-4e24-a8a1-1acdc8ef2997)
+
+back to the channel of slack we've created for alerts. copy the 'Channel ID' at the bottom.
+![image](https://github.com/user-attachments/assets/36a6ce17-516a-4494-ab6b-bb0d0049d52e)
+
+paste it to tines slack template build 'Channel/User ID'
+![image](https://github.com/user-attachments/assets/f914c6d9-eb43-4a8a-9e48-8d216b1461e9)
+
+
+Hover the mouse in the 'Webhook' an 'arrow down' will appear. click it then drag to slacks to connect each other.
+![image](https://github.com/user-attachments/assets/61e0e97d-352a-4663-b990-d26a6efb2684)
+
+Next is the email, drag the 'Send Email' into the dashboard and connect it also to our webhook.
+![image](https://github.com/user-attachments/assets/e050ec55-5b6a-483a-8f71-d3b08fa9b5e4)
+
+in build section, fill up the fields.
+test if it will work by clicking 'test' it will show the retrieved detections in our webhook, select the latest one. (you can also do the same in slacks to check if it will receive a message)
+
+![image](https://github.com/user-attachments/assets/9fe90ca0-15c3-4ec2-a673-5980ad78c21a)
+
+
+![image](https://github.com/user-attachments/assets/f8f2ee45-4401-41b7-8dec-e29ebf920725)
+
+
+
+Let's edit the message that will be sent in slack and email. base on the diagram i created, the details to be sent is :
+
+```
+Time
+Computer Name
+Source IP
+Process
+Command Line
+File Path
+Sensor ID
+Link to detection (if applicable)
+```
+Go to 'Webhook' then click Events. Select the latest one. in details of the event, dropdown the 'body'
+![image](https://github.com/user-attachments/assets/e06cbd1a-cbd0-4f5b-a688-e5786e111be0)
+
+Here is where we are getting the details we needed for the messages notification.
+if you hover your cursor in the beginning of each line, an icon for copy will appear. just click it to copy the fields you need.(check the 'cat' code line)
+
+![image](https://github.com/user-attachments/assets/22827d2d-c8ac-4df7-9849-a2b1d4b3bf06)
+
+i will also put here all the fields needed to save your time (note : in some version,  it is <<retrieve_detections.body.cat>> instead of  <<retrieve_detection.body.cat>> so if it didn't work try putting or removing 's' in the 'detection' part)
+
+
+
+```
+Title  -   <<retrieve_detection.body.cat>>
+Event Time   - <<retrieve_detection.body.detect.routing.event_time>>
+Hostname  - <<retrieve_detection.body.detect.routing.hostname>>
+Username -  <<retrieve_detection.body.detect.event.USER_NAME>>
+Device IP - <<retrieve_detection.body.detect.routing.int_ip>>
+File path - <<retrieve_detection.body.detect.event.FILE_PATH>>
+Command Line -   <<retrieve_detection.body.detect.event.COMMAND_LINE>>
+Sensor ID  - <<retrieve_detection.body.detect.routing.sid>>
+Detection link -  <<retrieve_detection.body.link>>
+```
+
+
+
+Now that we have all the details we need. let's go back to slack to modify the message that will be sent to our alert channel.
+
+![image](https://github.com/user-attachments/assets/b0c3a985-e334-4f3c-a43b-b9935e8b1116)
+
+
+Let's test it again to see what it looks like in actual message. 
+
+![image](https://github.com/user-attachments/assets/887f3064-5816-4b79-835e-1b730785802d)
+
+
+Next, paste the same message in Email sender but this time we will put <br> every other line. 
+
+
+![image](https://github.com/user-attachments/assets/6d8aa9c1-8419-4d6f-bf1f-ac994b087783) 
+![image](https://github.com/user-attachments/assets/e3f2a9f9-9fa2-45e6-9d73-d1782b6fab85)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Next thing we will put in our dashboad is the 'user prompt'. To do that, click 'Tools' then select 'Page'. drag it to the dashboard.
+
+![image](https://github.com/user-attachments/assets/c572e63e-998d-419c-a84f-9b615ab43ecf)
+
+
+rename as 'User Prompt'. In the description, put 'Isolate Computer (Yes/No)'. you can also put a success message.
+![image](https://github.com/user-attachments/assets/4b9b71df-1547-4242-a8c4-8393e4c3389e)
+
+
+connect it to the 'Webhook' then click 'Edit page' at the bottom of build section.
+![image](https://github.com/user-attachments/assets/94dee7a3-f507-4675-bb42-de6af93003d2)
+
+
+Customize the fields and put a boolean button for Yes and No option.
+
+![image](https://github.com/user-attachments/assets/d6464597-a337-4451-a18a-e8ec4364d480)
+
+
+
+
+
+Let's edit the message that will be sent in slack and email. base on the diagram i created, the details to be sent is :
+
+
+Time
+Computer Name
+Source IP
+Process
+Command Line
+File Path
+Sensor ID
+Link to detection (if applicable)
 
 
