@@ -86,13 +86,14 @@ then click the 'LaZagne.exe'
 it will automatically blocked by Microsoft Defender so we need to disable it.
 ![image](https://github.com/user-attachments/assets/e0488de3-f079-440f-8b04-7c42b21933ee)
 
-go to 'Windows Security' > 'Virus % threat protection'
+go to 'Windows Security' > 'Virus & threat protection'
 ![image](https://github.com/user-attachments/assets/1597a974-435f-40a5-84fe-f8dc3349947a)
 
 under 'Virus & threat protection settings' click 'Manage settings' then disable the 'Real-time protection'
 ![image](https://github.com/user-attachments/assets/42359c26-4839-46a3-adeb-40c0f6309edb)
 
 now click the three dot in the right of download notification then select 'Keep' another warning will appear saying that the app is unsafe, select 'Keep anyway'
+
 ![image](https://github.com/user-attachments/assets/b5fad5bd-886b-4cd4-81e6-5a17b3fb5644)  ![image](https://github.com/user-attachments/assets/cd9eb9ff-be0e-4a96-964d-bdf4cede08b0)
 
 Once you completed to download the LaZagne.exe, open a powershell in administrator then start app.
@@ -182,8 +183,8 @@ Go to 'www.slack.com' then click 'GET STARTED'.
 ![image](https://github.com/user-attachments/assets/bb26eabe-43d1-4223-a49a-1ddead2086da)
 
 create an account. make sure to input a valid email because it will send a verification.
-once done creating account. create a channel.
-In the left side. create a channel.
+once done creating account. create a channel for our LimaCharlie alerts.
+
 ![image](https://github.com/user-attachments/assets/d15c17a2-abae-4d9a-9bfb-c22cfed3ac28)
 
 
@@ -214,7 +215,7 @@ Select 'Tines'
 
 ![image](https://github.com/user-attachments/assets/e4bbfb26-1b16-477e-8a3e-bb8c34ed1470)
 
-Put a name then in 'Destionation Host', paste the Webhook URL copied earlier.
+Put a name then in 'Destination Host', paste the Webhook URL copied earlier.
 
 ![image](https://github.com/user-attachments/assets/f9f8c17e-2963-49f6-9b4d-4300dc37d5bf)
 
@@ -314,28 +315,11 @@ Let's test it again to see what it looks like in actual message.
 ![image](https://github.com/user-attachments/assets/887f3064-5816-4b79-835e-1b730785802d)
 
 
-Next, paste the same message in Email sender but this time we will put <br> every other line. 
+Next, paste the same message in Email sender but this time we will put ``` <br> ``` every other line. 
 
 
 ![image](https://github.com/user-attachments/assets/6d8aa9c1-8419-4d6f-bf1f-ac994b087783) 
 ![image](https://github.com/user-attachments/assets/e3f2a9f9-9fa2-45e6-9d73-d1782b6fab85)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -359,20 +343,132 @@ Customize the fields and put a boolean button for Yes and No option.
 
 ![image](https://github.com/user-attachments/assets/d6464597-a337-4451-a18a-e8ec4364d480)
 
+In contents, we can also paste the same code that we used in our slack and email in order to input the details we need.
+
+![image](https://github.com/user-attachments/assets/b4bf6433-8b70-4923-a1eb-d42e755fc550)
+
+
+Then let's check our work by clicking 'visit page' so we can see what it looks like.
+ ![image](https://github.com/user-attachments/assets/3aa38597-fc49-4536-a0c2-915e287a7dac)
+
+Click 'No' then submit.
+![image](https://github.com/user-attachments/assets/865954df-bff0-4cfc-b866-20cadad12e37)
+
+Now lets proceed to 'No' function. in diagram, if we select 'no' it will send a message in slack.
+From the menu on the left, drag the trigger in our dashboard. connect again from our prompt to 'trigger;.
+
+
+![image](https://github.com/user-attachments/assets/a933ea0a-b21e-4428-b465-5b1aa1a6a1f5)
+
+Edit the name and rules of the trigger. you can paste this ``` <<user_prompt.body.isolate>> ``` and in the input box of rules, put 'false'.
+This is what it looks like :
+
+![image](https://github.com/user-attachments/assets/6996f1f2-a3c0-4a2b-8216-dbee6e486f53)
+
+
+(NOTE : in order to  make the trigger function work, you have to trigger the event first in our user prompt. thats why in prompt earlier, we select 'no' before we setup the 'No' function. that's what we also going to do later when we create the 'Yes' function.)
+
+Copy the existing 'Slack - Send a message' in dashboard. create a connection from trigger to the slack we copied. 
+We will edit the message because we dont need all the details from the 'slack' we copied.
+
+![image](https://github.com/user-attachments/assets/e508ae64-5242-49ed-b99e-dd466d360921)
+
+
+Then let's test it again. Click the 'User Prompt' > 'visit page' > select the event where we have to choose yes or no in isolate. (events before the latest). Select 'No' again the submit.
+
+![image](https://github.com/user-attachments/assets/e03b0713-0534-47ac-9f73-935da843ecc8)
+
+Now that our 'No' function is working just fine. Let's proceed in creating the 'Yes' function.
+
+Tips : if you have too many events and dont know what is event that there will be a yes or no option, you can always start in our 'webhook' select the event there to test then 're-emit'
+
+Go visit the 'User Prompt' again then select 'Yes'.
+
+Copy the 'Trigger' we used in 'No' and connect it also to our 'User Prompt'
+Edit the 'Rules' field.
+
+![image](https://github.com/user-attachments/assets/3c438812-d564-432c-95af-4c96aeb07fbe)
+
+
+Click template then search for 'LimaCharlie'. drag it to our dashboard.
+![image](https://github.com/user-attachments/assets/33dd6823-a363-46c9-812a-01e042f62be0)
+
+in 'build' search for isolate. select 'Isolate Sensor.'
+
+![image](https://github.com/user-attachments/assets/5ea153ea-e7f2-4777-9d3d-793bc4494e62)
+
+in the URL. you see the violet text {}sid . replace it with this ``` <<retrieve_detection.body.routing.sid>>  ```
+
+Connect the 'Yes trigger' to our 'Isolate Sensor'.
+
+![image](https://github.com/user-attachments/assets/6077ba55-8ac7-46f2-a56f-999f0efae566)![image](https://github.com/user-attachments/assets/304393ef-a4db-4c91-a78d-83aabd82bba9)
 
 
 
+click the dashboard and on the right side we will see the status of the story and other details. in the 'credential' section, we need to connect the LimaCharlie.
 
-Let's edit the message that will be sent in slack and email. base on the diagram i created, the details to be sent is :
+![image](https://github.com/user-attachments/assets/b2fcccc1-92b2-451a-84c4-3b10fe17e1bc)
 
 
-Time
-Computer Name
-Source IP
-Process
-Command Line
-File Path
-Sensor ID
-Link to detection (if applicable)
+to do that. go back to the stories selection. Click credentials then add new credential.
+![image](https://github.com/user-attachments/assets/b2548875-48b8-4127-bd0b-7da67d7feb57)
+
+Select text.
+
+![image](https://github.com/user-attachments/assets/1f93a36f-70d3-49ce-b640-fb7d0d7e70ba)
+
+we need to go back to LimaCharlie. go to 'Access Management' then click 'REST API'.
+
+![image](https://github.com/user-attachments/assets/04baef22-f1a6-4633-9eea-96d218121ffb)
+
+Copy the 'Org JWT' by clicking the 2 box at the end-right side of the asterisks.
+
+![image](https://github.com/user-attachments/assets/220fb147-7156-467c-9707-a31aaa3fba06)
+
+go back to Credential in Tines.. Paste what we copied earlier in 'Value'
+Drop down the 'Additional Configurations'. in URL Domains, input : ``` *.limacharlie.io ```
+
+![image](https://github.com/user-attachments/assets/5e0836bb-b68c-40c5-b43f-2cb20b25a52f)
+
+Save it. then check again the Credentials again.
+
+![image](https://github.com/user-attachments/assets/31aee6ee-2b39-472c-b23f-02acf2c47d64)
+
+
+
+Go back to LimaCharlie. go to 'Sensors List' then select our machine. if our story we created works, The network access will change from 'allowed' to 'isolated'
+
+![image](https://github.com/user-attachments/assets/3da97a84-4817-45ff-a189-767970057dea)
+
+
+Now try to re-emit the latest event in our 'webhook'. Visit the 'user prompt' and select 'yes'.
+
+![image](https://github.com/user-attachments/assets/66cb1e2c-b99d-4d61-b4f1-cce4efa0f9bc)
+
+
+We can also check our computer.
+
+
+
+![image](https://github.com/user-attachments/assets/03a3cc14-e76f-4336-afc8-1ecda501522f)
+
+
+Now for the final part, when the computer is isolated, we will receive a notification from slack that the computer has been isolated.
+
+Copy again the slack. Create a connection from 'Isolate Sensor' to the newly copied 'Slack'
+Edit the message box.
+
+![image](https://github.com/user-attachments/assets/d8d0f57d-69a4-4b30-863f-6cf685c1a32c)
+
+Try to run it again. Go to 'User Prompt' then re=emit the event.
+
+![image](https://github.com/user-attachments/assets/5d5d0682-f1b1-4c50-a4f7-c92888876f65)
+
+
+
+This is the whole picture of our project :
+
+![image](https://github.com/user-attachments/assets/09a11886-adf1-47df-9d57-76bfb7887f96)
+
 
 
